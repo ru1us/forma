@@ -64,7 +64,7 @@ body {
   transition: all 0.2s ease-in-out;
   font-family: "noka", sans-serif;
   text-decoration: none;
-  color: var(--pr-color);
+  color: rgb(187, 187, 187);
   font-size: 1vw;
 }
 /* Header wächst beim Hover */
@@ -78,7 +78,7 @@ body {
   width: 4vw;
   height: auto;
   cursor: pointer;
-  color: var(--pr-color);
+  color: rgb(187, 187, 187);
 }
 
 .header:hover a{
@@ -157,8 +157,8 @@ header a:hover{
 }
 
 .c-scrollbar_thumb{
-  background-color: var(--pr-color);
   opacity: 1;
+  background-color: rgb(178, 178, 178);
 }
 
 .vertical{
@@ -215,13 +215,20 @@ header a:hover{
   left: 0;
   will-change: transform;
 }
-.vertical_img .image__bl img{
+.vertical_img .image__bl img {
   scale: 1.5;
-  transform: translateY(10%);
+  transform: none;
+  min-height: 100%;
+  max-height: none;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
 }
 
 .vertical .title{
   transform: translateY(-100%);
+  font-size: 4vw;
 }
 
 .forma{
@@ -241,7 +248,7 @@ h2{
 }
 
 .title2{
-  font-size: 8vh;
+  font-size: 3vw;
   font-weight:400;
 }
 #about .horizontal_img{
@@ -305,6 +312,25 @@ h2{
   0% { width: 0%; }
   80% { width: 100%; }
   100% { width: 0%; }
+}
+
+#mobile-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: linear-gradient(var(--pr-color), var(--light-color));
+  color: var(--second-color);
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2vw;
+  font-family: "noka", sans-serif;
+}
+#mobile-warning p {
+  margin: 0;
+  line-height: 1.4;
 }
 
 

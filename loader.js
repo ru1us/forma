@@ -28,3 +28,17 @@ export function triggerLoad(href) {
     }
 }
 window.triggerLoad = triggerLoad;
+
+// Desktop-Only Overlay anzeigen, wenn Fenster zu klein ist
+function checkDesktopOnly() {
+  const warning = document.getElementById('mobile-warning');
+  if(window.innerWidth < 1100) {
+    warning.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  } else {
+    warning.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+window.addEventListener('resize', checkDesktopOnly);
+window.addEventListener('DOMContentLoaded', checkDesktopOnly);
