@@ -1,213 +1,105 @@
 window.addEventListener("load", function () {
-
-    window.addEventListener("scroll", function () {
-        const parallaxImages = document.querySelectorAll(".parallax-image");
-        parallaxImages.forEach((image) => {
-            const speed = 0.1; // Adjust speed as needed
-            const offset = window.scrollY * speed;
-            image.style.transform = `translateY(${offset}px)`;
-        });
+  this.document.querySelectorAll("nav .logo").forEach((img) => {
+    console.log("Adding click event listener to logo image:", img);
+    img.addEventListener("click", () => {
+      triggerLoad("index.html");
+      this.window.location.href = "index.html";
     });
+  });
 
-    this.document.querySelectorAll("nav .logo").forEach((img) => {
-        console.log("Adding click event listener to logo image:", img);
-        img.addEventListener("click", () => {
-            triggerLoad("index.html");
-            this.window.location.href = "index.html";
-        });
-    });
+  const mainPic = document.querySelector("#mainpic");
+  const imagesContainer = document.querySelector(".left");
+  const descContainer = document.querySelector(".desc");
+  const rightContainer = document.querySelector(".container .right");
 
-    const mainPic = document.querySelector("#mainpic");
-    if (!mainPic) {
-        console.error("Element with id 'mainpic' not found in the DOM.");
-        return;
-    }
+  function setupSimpleMediaSwitch(container, mainMedia) {
+    if (!container || !mainMedia) return;
+    const mediaThumbs = container.querySelectorAll("img, video");
+    let currentMainMedia = mainMedia;
+    let progressBar = null;
 
-    const imagesContainer = document.querySelector(".left");
-    const descContainer = document.querySelector(".desc");
-    const icons = document.querySelectorAll(".icons img");
+    function setActiveMedia(media) {
 
-    function updateImages(dataset) {
-        imagesContainer.innerHTML = "";
+      if (progressBar && progressBar.parentNode) {
+        progressBar.parentNode.removeChild(progressBar);
+        progressBar = null;
+      }
 
-        dataset.left.forEach(item => {
-            const img = document.createElement("img");
-            img.src = item.src;
-            img.dataset.title = item.title;
-            img.dataset.description = item.description;
-            imagesContainer.appendChild(img);
-        });
-
-        const images = document.querySelectorAll(".left img");
-        images.forEach(img => {
-            img.addEventListener("click", function (e) {
-                console.log("img clicked", img);
-                let link = e.target.src;
-                mainPic.src = link;
-
-                if (descContainer) {
-                    descContainer.innerHTML = `
-                        <h2>${e.target.dataset.title}</h2>
-                        <p>${e.target.dataset.description}</p>
-                    `;
-                }
-
-                images.forEach(img => {
-                    img.style.filter = "none";
-                    img.style.boxShadow = "none";
-                    img.style.scale = "1";
-                });
-
-                e.target.style.filter = "brightness(200%)";
-                e.target.style.scale = "1.01";
-            });
-        });
-
-        if (images.length > 0) {
-            images[0].click();
+      if (currentMainMedia.tagName !== media.tagName) {
+        let newMedia;
+        if (media.tagName === "VIDEO") {
+          newMedia = document.createElement("video");
+          newMedia.src = media.src;
+          newMedia.poster = media.poster || "";
+          newMedia.autoplay = true;
+          newMedia.loop = true;
+          newMedia.controls = false;
+          newMedia.className = currentMainMedia.className;
+          newMedia.id = currentMainMedia.id;
+        } else {
+          newMedia = document.createElement("img");
+          newMedia.src = media.src;
+          newMedia.className = currentMainMedia.className;
+          newMedia.id = currentMainMedia.id;
         }
+        currentMainMedia.parentNode.replaceChild(newMedia, currentMainMedia);
+        currentMainMedia = newMedia;
+      } else {
+        currentMainMedia.src = media.src;
+        if (currentMainMedia.tagName === "VIDEO") {
+          currentMainMedia.poster = media.poster || "";
+          currentMainMedia.autoplay = true;
+          currentMainMedia.loop = true;
+          currentMainMedia.controls = false;
+        }
+      }
+
+      mediaThumbs.forEach((m) => {
+        m.style.opacity = "1";
+      });
+      media.style.opacity = "0.6";
+
+      if (currentMainMedia.tagName === "VIDEO") {
+        progressBar = document.createElement("div");
+        progressBar.className = "video-progress-bar";
+        progressBar.style.height = "4px";
+        progressBar.style.width = "100%";
+        progressBar.style.background = "#eee";
+        progressBar.style.position = "relative";
+        progressBar.style.marginTop = "8px";
+        let innerBar = document.createElement("div");
+        innerBar.style.height = "100%";
+        innerBar.style.width = "0%";
+        innerBar.style.background = "#B48B67";
+        innerBar.style.transition = "width 0.1s linear";
+        progressBar.appendChild(innerBar);
+        currentMainMedia.parentNode.appendChild(progressBar);
+        currentMainMedia.addEventListener("timeupdate", function () {
+          if (currentMainMedia.duration) {
+            innerBar.style.width =
+              (currentMainMedia.currentTime / currentMainMedia.duration) * 100 +
+              "%";
+          }
+        });
+        currentMainMedia.addEventListener("ended", function () {
+          innerBar.style.width = "100%";
+        });
+      }
     }
 
-    const defaultDataset = {
-        left: [
-            {
-                src: "public/scene1.png",
-                title: "scnene1",
-                description: "This is a description for the scene1 image."
-            },
-            {
-                src: "public/scene2.png",
-                title: "scene2",
-                description: "This is a description for the scene2 image."
-            },
-            {
-                src: "public/scene3.png",
-                title: "scene3",
-                description: "This is a description for the scene3 image."
-            },
-            {
-                src: "public/scene4.png",
-                title: "scene4",
-                description: "This is a description for the scene4 image."
-            },
-            {
-                src: "public/scene5.png",
-                title: "scene5",
-                description: "This is a description for the scene5 image."
-            }
-        ]
-    };
-
-    updateImages(defaultDataset);
-
-    icons.forEach((icon, index) => {
-        icon.addEventListener("click", () => {
-            console.log("Icon clicked:", index);
-
-            const datasets = [
-                {
-                    left: [
-                        {
-                            src: "public/scene1.png",
-                            title: "scene1",
-                            description: "This is a description for the scene1 picture."
-                        },
-                        {
-                            src: "public/scene2.png",
-                            title: "scene2",
-                            description: "This is a description for the scene2 picture."
-                        },
-                        {
-                            src: "public/scene3.png",
-                            title: "scene3",
-                            description: "This is a description for the scene3 picture."
-                        },
-                        {
-                            src: "public/scene4.png",
-                            title: "scene4",
-                            description: "This is a description for the scene4 picture."
-                        },
-                        {
-                            src: "public/scene5.png",
-                            title: "scene5",
-                            description: "This is a description for the scene5 picture."
-                        }
-                    ]
-                },
-                {
-                    left: [
-                        {
-                            src: "public/water1.png",
-                            title: "water1",
-                            description: "This is a description for the water1 picture."
-                        },
-                        {
-                            src: "public/water2.png",
-                            title: "water2",
-                            description: "This is a description for the water2 picture."
-                        },
-                        {
-                            src: "public/water3.png",
-                            title: "water3",
-                            description: "This is a description for the water3 picture."
-                        },
-                        {
-                            src: "public/water4.png",
-                            title: "water4",
-                            description: "This is a description for the water4 picture."
-                        }
-                    ]
-                },
-                {
-                    left: [
-                        {
-                            src: "public/lamp1.png",
-                            title: "lamp1",
-                            description: "This is a description for the lamp1 picture."
-                        },
-                        {
-                            src: "public/lamp2.png",
-                            title: "lamp2",
-                            description: "This is a description for the lamp2 picture."
-                        },
-                        {
-                            src: "public/lamp3.png",
-                            title: "lamp3",
-                            description: "This is a description for the lamp3 picture."
-                        }
-                    ]
-                },
-                {
-                    left: [
-                        {
-                            src: "public/chair1.png",
-                            title: "chair1",
-                            description: "This is a description for the chair1 picture."
-                        },
-                        {
-                            src: "public/chair2.png",
-                            title: "chair2",
-                            description: "This is a description for the chair2 picture."
-                        },
-                        {
-                            src: "public/chair3.png",
-                            title: "chair3",
-                            description: "This is a description for the chair3 picture."
-                        },
-                        {
-                            src: "public/chair4.png",
-                            title: "chair4",
-                            description: "This is a description for the chair4 picture."
-                        }
-                    ]
-                }
-            ];
-
-            if (datasets[index]) {
-                updateImages(datasets[index]);
-            } else {
-                console.error(`No dataset found for icon at index ${index}`);
-            }
-        });
+    mediaThumbs.forEach((media) => {
+      media.addEventListener("click", function () {
+        setActiveMedia(media);
+      });
     });
+    if (mediaThumbs.length > 0) {
+      setActiveMedia(mediaThumbs[0]);
+    }
+  }
+
+  document.querySelectorAll(".snap-section").forEach((section) => {
+    const left = section.querySelector(".left");
+    const mainMedia = section.querySelector(".parallax-image");
+    setupSimpleMediaSwitch(left, mainMedia);
+  });
 });

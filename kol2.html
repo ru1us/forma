@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,62 +10,121 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="kol.css">
 </head>
+
 <body>
 
     <div id="loading-screen" style="display: none;">
         <div class="loader-bar">
-          <div class="loader-bar-progress"></div>
+            <div class="loader-bar-progress"></div>
         </div>
         <p>Lädt...</p>
     </div>
 
     <div id="mobile-warning">
-      <p>Diese Seite ist nur für Desktop-Bildschirme optimiert.<br>Bitte nutze einen größeren Bildschirm.</p>
+        <p>Diese Seite ist nur für Desktop-Bildschirme optimiert.<br>Bitte nutze einen größeren Bildschirm.</p>
     </div>
 
     <header class="header">
         <nav class="nav">
-            <svg id="logo" class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                <ellipse class="st0" cx="332.8" cy="105.8" rx="74.9" ry="73" fill="currentColor"/>
-                <ellipse class="st0" cx="160.8" cy="105.8" rx="63" ry="61.4" fill="currentColor"/>
-                <ellipse class="st0" cx="160.8" cy="264.5" rx="51.7" ry="50.3" fill="currentColor"/>
-                <ellipse class="st0" cx="160.8" cy="419.8" rx="43.4" ry="42.3" fill="currentColor"/>
-                <ellipse class="st0" cx="332.8" cy="264.5" rx="63" ry="61.4" fill="currentColor"/>
+            <svg id="logo" class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
+                style="enable-background:new 0 0 500 500;" xml:space="preserve">
+                <ellipse class="st0" cx="332.8" cy="105.8" rx="74.9" ry="73" fill="currentColor" />
+                <ellipse class="st0" cx="160.8" cy="105.8" rx="63" ry="61.4" fill="currentColor" />
+                <ellipse class="st0" cx="160.8" cy="264.5" rx="51.7" ry="50.3" fill="currentColor" />
+                <ellipse class="st0" cx="160.8" cy="419.8" rx="43.4" ry="42.3" fill="currentColor" />
+                <ellipse class="st0" cx="332.8" cy="264.5" rx="63" ry="61.4" fill="currentColor" />
             </svg>
-            <a href="#">1. Kollektion</a>
+            <a href="kol1.html">LUCE & LEGNO</a>
             <a href="#">RAWLINE</a>
-            <a href="#">3. Kollektion</a>
+            <a href="#">DIS/COMFORT</a>
         </nav>
     </header>
     <section id="main">
-        <div class="container">
-            <div class="left">
-              <img src="public/scene1.png" alt="img1">
-              <img src="public/scene1.png" alt="img2">
-              <img src="public/scene1.png" alt="img3">
-              <img src="public/scene1.png" alt="img4">
-              <img src="public/logo.svg" alt="img5">
+        <section class="snap-section">
+            <h1>RAWLINE</h1>
+            <div class="container">
+                <div class="left">
+                    <img src="public/raw/scene1.png" alt="scene1">
+                    <img src="public/raw/scene2.png" alt="scene2">
+                    <img src="public/raw/scene3.png" alt="scene3">
+                    <img src="public/raw/scene4.png" alt="scene4">
+                    <img src="public/raw/scene5.png" alt="scene5">
+                </div>
+                <div class="right">
+                    <img class="parallax-image" id="mainpic-rawline" src="public/raw/scene1.png" alt="scene1">
+                </div>
             </div>
-            <div class="right">
-                <img class="parallax-image" id="mainpic" src="public/scene1.png" alt="img5">
+        </section>
+        <section class="snap-section">
+            <h1>FERRO</h1>
+            <div class="container ">
+                <div class="right">
+                    <img class="parallax-image" id="mainpic-sink" src="public/raw/water1.png" alt="water1">
+                </div>
+                <div class="left">
+                    <img src="public/raw/water1.png" alt="water1">
+                    <img src="public/raw/water2.png" alt="water2">
+                    <img src="public/raw/water3.png" alt="water3">
+                </div>
+            </div>
+            <div class="desc d-right">
+                <p>Der Wasserhahn "FERRO" ist aus verschweißten Stahlrohren gefertigt und greift die industrielle
+                    Formsprache der Umgebung auf – roh, funktional und konsequent in Materialität und Konstruktion.</p>
+            </div>
+        </section>
+        <section class="snap-section">
+            <h1>LUXCORE</h1>
+            <div class="container">
+                <div class="left">
+                    <img src="public/raw/lamp1.png" alt="lamp1">
+                    <img src="public/raw/lamp2.png" alt="lamp2">
+                    <img src="public/raw/lamp3.png" alt="lamp3">
+                </div>
+                <div class="right">
+                    <img class="parallax-image" id="mainpic-lamp" src="public/raw/lamp1.png" alt="lamp1">
+                </div>
             </div>
             <div class="desc">
-                <h2>Title</h2>
-                <p>Dies beschreibt</p>
+                <p>Die Lampe "LUXCORE" kombiniert verschweißte Stahlrohre mit einem markanten Gitterelement – eine
+                    Hommage an industrielle Technikästhetik, die Licht durch rohe Konstruktion definiert.</p>
             </div>
-        </div>
-        <div class="icons">
-            <img src="public/acene.svg" alt="img1">
-            <img src="public/sink.svg" alt="img2">
-            <img src="public/lamp.svg" alt="img3">
-            <img src="public/chair.svg" alt="img4">
-        </div>
-        <section id="bottom">
+        </section>
+        <section class="snap-section">
+            <h1>STRUKT</h1>
+            <div class="container">
+                <div class="right">
+                    <img class="parallax-image" id="mainpic-chair" src="public/raw/chair1.png" alt="chair1">
+                </div>
+                <div class="left">
+                    <img src="public/raw/chair1.png" alt="chair1">
+                    <img src="public/raw/chair2.png" alt="chair2">
+                    <img src="public/raw/chair3.png" alt="chair3">
+                    <img src="public/raw/chair4.png" alt="chair4">
+                </div>
+            </div>
+            <div class="desc d-right">
+                <p>"STRUKT" ist ein Barstuhl aus geschwärzten Stahlrohren mit sichtbaren Schweißnähten und einer
+                    Gitterlehne – ein technisches Sitzobjekt, das industrielle Rohheit mit minimalistischer Klarheit
+                    verbindet.</p>
+            </div>
+        </section>
+        <section class="snap-section" id="bottom">
             <h2>Konzeptbeschreibung</h2>
-            <p>RAWLINE steht für eine kompromisslose Klarheit in Design und Materialwahl. Es ist ein Statement für authentisches, funktionales Wohnen – geprägt von industrieller Direktheit und technischer Eleganz.
-                
-                Die Ästhetik ist bewusst roh gehalten: legierter schwarzer Stahl mit sichtbaren Schweißnähten, runde Konstruktionen, die an industrielle Rohrsysteme erinnern, und Gitterelemente, wie man sie aus Werkhallen kennt, ziehen sich stringent durch das gesamte Möbelensemble.</p>
+            <p>"RAWLINE" steht für eine kompromisslose Klarheit in Design und Materialwahl. Es ist ein Statement für
+                authentisches, funktionales Wohnen – geprägt von industrieller Direktheit und technischer Eleganz.
+
+                Die Ästhetik ist bewusst roh gehalten: legierter schwarzer Stahl mit sichtbaren Schweißnähten, runde
+                Konstruktionen, die an industrielle Rohrsysteme erinnern, und Gitterelemente, wie man sie aus Werkhallen
+                kennt, ziehen sich stringent durch das gesamte Möbelensemble.
+
+            </p>
+            <p>Eine klare Symmetrie in Proportion und Aufbau verstärkt den technisch-funktionalen Charakter der Entwürfe
+                und sorgt dafür, dass die einzelnen Objekte in ihrer Formsprache harmonieren. Durch diese gestalterische
+                Strenge und die konsistente Materialität entsteht ein Ensemble, das trotz seiner Rohheit geschlossen und
+                präzise wirkt – industrial, reduziert, konsequent.
+
+            </p>
         </section>
         <footer>
             <p>© 2025 Rufus Plaga. All rights reserved.</p>
@@ -72,9 +132,11 @@
             <p>meineemail@mail.com</p>
         </footer>
     </section>
-    
+    </section>
+
     <script type="module" src="loader.js"></script>
     <script src="kolscript.js"></script>
-    
+
 </body>
+
 </html>

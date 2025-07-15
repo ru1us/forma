@@ -1,12 +1,13 @@
-:root{
+:root {
   --pr-color: #EEE5DA;
   --second-color: #2C211B;
   --light-color: #CEB99D;
   --mid-color: #B48B67;
-  --cubicbz: cubic-bezier(.9,0,.1,1);
+  --cubicbz: cubic-bezier(.9, 0, .1, 1);
   --fz-big: 60px;
   --pd: 50px;
 }
+
 * {
   box-sizing: border-box;
   font-family: "noka", sans-serif;
@@ -15,7 +16,7 @@
   font-feature-settings: "pnum" on, "lnum" on;
 }
 
-body{
+body {
   position: relative;
   margin: 0;
   padding: 0;
@@ -30,16 +31,11 @@ body{
   position: absolute;
   width: 100%;
   height: 100%;
-  /* background: url(https://i.pinimg.com/236x/35/64/cd/3564cd3b43bcbd3f2bdb286808ea056e.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; */
   filter: blur(70px);
   transform: scale(2);
   opacity: .6;
 }
 
-/* Grundlayout */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,63 +55,72 @@ body {
   mix-blend-mode: difference;
 }
 
-.header a{
-  display: none;
-  transition: all 0.2s ease-in-out;
+.header a {
+  display: flex;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.4s var(--cubicbz),
+    transform 0.4s var(--cubicbz),
+    font-weight 0.2s;
   font-family: "noka", sans-serif;
   text-decoration: none;
   color: rgb(187, 187, 187);
   font-size: 1vw;
+  pointer-events: none;
+  white-space: nowrap;
 }
-/* Header wächst beim Hover */
+
 .header:hover {
   width: fit-content;
   transition: all .4s ease-in-out;
- /*  background-color: var(--mid-color); */
 }
 
-.header svg{
+.header svg {
   width: 4vw;
   height: auto;
   cursor: pointer;
   color: rgb(187, 187, 187);
+  transition: none;
 }
 
-.header:hover a{
-  display: flex;
+.header:hover a {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
-header a:hover{
+header a:hover {
   opacity: 0.6;
+  color: var(--pr-color);
 }
 
-/* Navigation */
 .nav {
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  
+
 }
 
 
 
-.content{
+.content {
   display: flex;
 }
 
-.section{
+.section {
   position: relative;
   width: 100vw;
   height: 100vh;
 }
 
-.section_bl{
+.section_bl {
   width: 100%;
   height: 100%;
 }
 
-.title{
+.title {
   position: absolute;
   margin: 0;
   top: 50%;
@@ -128,14 +133,14 @@ header a:hover{
   color: var(--second-color);
 }
 
-.title span{
+.title span {
   display: block;
   color: var(--second-color);
 }
 
 
 
-.text{
+.text {
   position: absolute;
   bottom: 10vw;
   right: 10vw;
@@ -145,7 +150,7 @@ header a:hover{
   z-index: 5;
 }
 
-[data-scroll-container]{
+[data-scroll-container] {
   overflow-y: hidden !important;
   overflow-x: hidden !important;
 }
@@ -156,41 +161,46 @@ header a:hover{
   pointer-events: none;
 }
 
-.c-scrollbar_thumb{
+.c-scrollbar_thumb {
   opacity: 1;
   background-color: rgb(178, 178, 178);
 }
 
-.vertical{
+.vertical {
   width: 100vw;
   min-width: 100vw;
   height: 100%;
 }
 
-.vertical .inner-section{
+.vertical .inner-section {
   position: relative;
   width: 100vw;
   height: 100vh !important;
 }
 
-.image{
+.image {
   position: absolute;
   width: 40%;
   height: 90%;
   top: 50%;
   right: 5vw;
   overflow: hidden;
-  /* background-color: green; */
   transform: translateY(-50%);
   box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
-  /* border-radius: 8px; */
 }
 
-.image__bl{
+.image__bl {
   will-change: transform;
 }
 
-.image__bl img{
+.image__bl img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.image__bl video {
   display: block;
   height: 100%;
   object-fit: cover;
@@ -198,7 +208,7 @@ header a:hover{
 }
 
 
-.horizontal_img .image__bl{
+.horizontal_img .image__bl {
   position: absolute;
   width: 1100px;
   height: 100%;
@@ -208,13 +218,14 @@ header a:hover{
 }
 
 
-.vertical_img .image__bl{
+.vertical_img .image__bl {
   position: absolute;
   height: 950px;
   top: 0;
   left: 0;
   will-change: transform;
 }
+
 .vertical_img .image__bl img {
   scale: 1.5;
   transform: none;
@@ -226,46 +237,60 @@ header a:hover{
   object-fit: cover;
 }
 
-.vertical .title{
+.vertical_img .image__bl video {
+  scale: 1.5;
+  transform: none;
+  min-height: 100%;
+  max-height: none;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
+}
+
+.vertical .title {
   transform: translateY(-100%);
   font-size: 4vw;
 }
 
-.forma{
-  font-family: "grappa-two-variable", sans-serif;
+.forma {
+  font-family: "grappa-variable", sans-serif;
   font-weight: 400;
   font-size: 10vh;
 }
 
-h2{
+h2 {
   font-weight: 600;
+  color: var(--second-color);
 }
 
-.footer{
+.footer {
   position: absolute;
   bottom: 10vw;
   right: 10vw;
 }
 
-.title2{
+.title2 {
   font-size: 3vw;
-  font-weight:400;
+  font-weight: 400;
 }
-#about .horizontal_img{
+
+#about .horizontal_img {
   margin-right: 50vw;
 }
 
-#intro  {
+#intro {
   width: 50vw;
 }
 
-#intro .title2{
+#intro .title2 {
   font-size: 2vh;
   font-weight: 400;
   padding: 10px;
   width: 40vw;
   height: auto;
 }
+
 #intro .title2 {
   font-size: 2vh;
   font-weight: 400;
@@ -282,17 +307,17 @@ h2{
 
 
 #loading-screen {
-    position: fixed;
-    inset: 0;
-    color: var(--second-color);
-    background: linear-gradient(var(--pr-color), var(--light-color));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    z-index: 9999;
-  }
+  position: fixed;
+  inset: 0;
+  color: var(--second-color);
+  background: linear-gradient(var(--pr-color), var(--light-color));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  z-index: 9999;
+}
 
 .loader-bar {
   width: 200px;
@@ -302,16 +327,26 @@ h2{
   overflow: hidden;
   margin: 0 auto 16px auto;
 }
+
 .loader-bar-progress {
   width: 0%;
   height: 100%;
   background: var(--second-color);
   animation: loading-bar 1s linear infinite;
 }
+
 @keyframes loading-bar {
-  0% { width: 0%; }
-  80% { width: 100%; }
-  100% { width: 0%; }
+  0% {
+    width: 0%;
+  }
+
+  80% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
 }
 
 #mobile-warning {
@@ -328,10 +363,8 @@ h2{
   padding: 0 2vw;
   font-family: "noka", sans-serif;
 }
+
 #mobile-warning p {
   margin: 0;
   line-height: 1.4;
 }
-
-
-

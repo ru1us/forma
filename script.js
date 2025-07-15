@@ -1,15 +1,18 @@
 window.addEventListener("load", function () {
+    document.getElementById("link1").addEventListener("click", function () {
+        triggerLoad("kol1.html");
+        window.location.href = "kol1.html";
+    });
 
     document.getElementById("link2").addEventListener("click", function () {
         triggerLoad("kol2.html");
-        window.location.href = "kol2.html"
-
+        window.location.href = "kol2.html";
     });
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const scroller = this.document.querySelector('[data-scroll-container]')
-    
+    const scroller = this.document.querySelector("[data-scroll-container]");
+
     const locoScroll = new LocomotiveScroll({
         el: scroller,
         smooth: true,
@@ -22,15 +25,13 @@ window.addEventListener("load", function () {
         tablet: {
             smooth: true,
             direction: "horizontal",
-        }
+        },
     });
 
     locoScroll.stop();
     this.setTimeout(() => {
-        locoScroll.start(); 
+        locoScroll.start();
     }, 1000);
-
-
 
     locoScroll.on("scroll", ScrollTrigger.update);
 
@@ -50,39 +51,39 @@ window.addEventListener("load", function () {
                 left: 0,
                 top: 0,
                 width: window.innerWidth,
-                height: window.innerHeight
+                height: window.innerHeight,
             };
         },
-        pinType: scroller.style.transform ? "transform" : "fixed"
+        pinType: scroller.style.transform ? "transform" : "fixed",
     });
 
     ScrollTrigger.defaults({
-        scroller: scroller
+        scroller: scroller,
     });
-
 
     let ScrollTween = gsap.to(".anim-wrap", {
         scrollTrigger: {
-        trigger: ".vertical",
-        scroller: scroller,
-        start: "left left",
-        end: () => "+=" + document.querySelector(".anim-wrap").scrollHeight,
-        scrub: true,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        horizontal: true,
-        invalidateOnRefresh: true,
-        refreshPriority: 1,
+            trigger: ".vertical",
+            scroller: scroller,
+            start: "left left",
+            end: () => "+=" + document.querySelector(".anim-wrap").scrollHeight,
+            scrub: true,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            horizontal: true,
+            invalidateOnRefresh: true,
+            refreshPriority: 1,
         },
-        y: () => -(document.querySelector('.anim-wrap').scrollHeight - window.innerHeight),
+        y: () =>
+            -(document.querySelector(".anim-wrap").scrollHeight - window.innerHeight),
         ease: "none",
     });
 
     const gsapHImg = gsap.utils.toArray(".image.horizontal_img");
     gsapHImg.forEach((gsHImg) => {
         const itemHImg = gsHImg.querySelector(".image__bl");
-        
+
         gsap.to(itemHImg, {
             scrollTrigger: {
                 trigger: gsHImg,
@@ -91,10 +92,10 @@ window.addEventListener("load", function () {
                 scrub: 0.7,
                 horizontal: true,
                 invalidateOnRefresh: true,
-                refreshPriority: 1
+                refreshPriority: 1,
             },
             x: 0,
-            ease: "none"
+            ease: "none",
         });
     });
 
@@ -111,10 +112,10 @@ window.addEventListener("load", function () {
                 scrub: 0.7,
                 horizontal: false,
                 refreshPriority: 1,
-                containerAnimation: ScrollTween
+                containerAnimation: ScrollTween,
             },
             y: 210,
-            ease: "none"
+            ease: "none",
         });
 
         gsap.to(title, {
@@ -125,17 +126,15 @@ window.addEventListener("load", function () {
                 scrub: 1.5,
                 horizontal: false,
                 refreshPriority: 1,
-                containerAnimation: ScrollTween
+                containerAnimation: ScrollTween,
             },
             y: 85,
-            ease: "none"
+            ease: "none",
         });
     });
 
-
     ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
     ScrollTrigger.refresh();
-
 
     // Smooth Image Distortion Transition with Three.js, GSAP, and Displacement Map
 
@@ -143,22 +142,43 @@ window.addEventListener("load", function () {
 
     let renderer, scene, camera, material, mesh;
     let uniforms;
-    const container = document.querySelector('.distortion');
+    const container = document.querySelector(".distortion");
     let rect = container.getBoundingClientRect();
     let width = rect.width;
     let height = rect.height;
 
-    // Load textures
+    // Load videos as textures
+    const video1 = document.createElement("video");
+    video1.src = "./public/displace/video1.mp4";
+    video1.crossOrigin = "anonymous";
+    video1.loop = true;
+    video1.muted = true;
+    video1.playsInline = true;
+    video1.autoplay = true;
+    video1.play();
+
+    const video2 = document.createElement("video");
+    video2.src = "./public/displace/video2.mp4";
+    video2.crossOrigin = "anonymous";
+    video2.loop = true;
+    video2.muted = true;
+    video2.playsInline = true;
+    video2.autoplay = true;
+    video2.play();
+
+    const texture1 = new THREE.VideoTexture(video1);
+    const texture2 = new THREE.VideoTexture(video2);
+
     const loader = new THREE.TextureLoader();
-    const texture1 = loader.load('./public/displace/1.png');
-    const texture2 = loader.load('./public/displace/2.png');
-    const disp = loader.load('./public/displace/heightmap2.png');
-    
+    const disp = loader.load("./public/displace/heightmap2.png");
 
     // Set texture properties for displacement
     texture1.minFilter = texture2.minFilter = disp.minFilter = THREE.LinearFilter;
     texture1.magFilter = texture2.magFilter = disp.magFilter = THREE.LinearFilter;
-    texture1.anisotropy = texture2.anisotropy = disp.anisotropy = renderer ? renderer.capabilities.getMaxAnisotropy() : 1;
+    texture1.anisotropy =
+        texture2.anisotropy =
+        disp.anisotropy =
+        renderer ? renderer.capabilities.getMaxAnisotropy() : 1;
 
     // Create scene
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -167,12 +187,17 @@ window.addEventListener("load", function () {
 
     scene = new THREE.Scene();
     camera = new THREE.OrthographicCamera(
-        width / -2, width / 2, height / 2, height / -2, 1, 1000
+        width / -2,
+        width / 2,
+        height / 2,
+        height / -2,
+        1,
+        1000
     );
     camera.position.z = 1;
 
     // Stärke des Displacement-Effekts zentral steuern
-    const DISTORTION_STRENGTH = .1; // Hier Wert anpassen (z.B. 0.2 = schwach, 2.0 = sehr stark)
+    const DISTORTION_STRENGTH = 0.1;
 
     // Shader uniforms
     uniforms = {
@@ -180,15 +205,15 @@ window.addEventListener("load", function () {
         dispFactor: { value: 0.0 },
         texture1: { value: texture1 },
         texture2: { value: texture2 },
-        disp: { value: disp }
+        disp: { value: disp },
     };
 
     // Vertex shader
     const vertexShader = `
     varying vec2 vUv;
     void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
     }
     `;
 
@@ -204,9 +229,12 @@ window.addEventListener("load", function () {
     void main() {
         vec2 uv = vUv;
         vec4 disp = texture2D(disp, uv);
-        // Verzerrung nur horizontal (x-Achse)
-        vec2 distortedPosition = uv + vec2(dispFactor * (disp.r*effectFactor), 0.0);
-        vec2 distortedPosition2 = uv - vec2((1.0 - dispFactor) * (disp.r*effectFactor), 0.0);
+        vec2 distortedPosition = uv;
+        vec2 distortedPosition2 = uv;
+        if (dispFactor > 0.0 && dispFactor < 1.0) {
+            distortedPosition = uv + vec2(dispFactor * (disp.r*effectFactor), 0.0);
+            distortedPosition2 = uv - vec2((1.0 - dispFactor) * (disp.r*effectFactor), 0.0);
+        }
         vec4 _texture1 = texture2D(texture1, distortedPosition);
         vec4 _texture2 = texture2D(texture2, distortedPosition2);
         gl_FragColor = mix(_texture1, _texture2, dispFactor);
@@ -218,15 +246,27 @@ window.addEventListener("load", function () {
         uniforms: uniforms,
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,
-        transparent: true
+        transparent: true,
     });
 
-    const geometry = new THREE.PlaneGeometry(width, height, 1);
-    mesh = new THREE.Mesh(geometry, material);
+    // Helper to create mesh with correct aspect ratio and centered
+    function createCenteredMesh(videoWidth, videoHeight, containerWidth, containerHeight) {
+        // Video soll volle Höhe ausfüllen, Breite darf überstehen
+        const videoRatio = videoWidth / videoHeight;
+        const drawHeight = containerHeight;
+        const drawWidth = containerHeight * videoRatio;
+        const geometry = new THREE.PlaneGeometry(drawWidth, drawHeight, 1);
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(0, 0, 0); // Exakt zentriert
+        return mesh;
+    }
+
+    // Initial mesh (will be replaced after video metadata loaded)
+    mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, height, 1), material);
     scene.add(mesh);
 
-    // Handle resize
-    function onResize() {
+    // Handle resize and centering
+    function updateGeometryToVideoRatio() {
         rect = container.getBoundingClientRect();
         width = rect.width;
         height = rect.height;
@@ -236,13 +276,30 @@ window.addEventListener("load", function () {
         camera.top = height / 2;
         camera.bottom = height / -2;
         camera.updateProjectionMatrix();
-        mesh.geometry.dispose();
-        mesh.geometry = new THREE.PlaneGeometry(width, height, 1);
+
+        // Only update mesh if video metadata is loaded
+        if (video1.videoWidth && video1.videoHeight) {
+            // Remove old mesh
+            scene.remove(mesh);
+            if (mesh.geometry) mesh.geometry.dispose();
+            // Create new centered mesh
+            mesh = createCenteredMesh(
+                video1.videoWidth,
+                video1.videoHeight,
+                width,
+                height
+            );
+            scene.add(mesh);
+        }
     }
-    window.addEventListener('resize', onResize);
+    video1.addEventListener("loadedmetadata", updateGeometryToVideoRatio);
+    window.addEventListener("resize", updateGeometryToVideoRatio);
 
     // Render loop
     function animate() {
+        // Update video textures
+        if (texture1) texture1.needsUpdate = true;
+        if (texture2) texture2.needsUpdate = true;
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
@@ -250,50 +307,23 @@ window.addEventListener("load", function () {
 
     // LocomotiveScroll: Shader-Effekt ab horizontalem Scroll von 400
     let shaderTriggered = false;
-    locoScroll.on('scroll', (obj) => {
+    locoScroll.on("scroll", (obj) => {
         const scrollX = locoScroll.scroll.instance.scroll.x;
         if (!shaderTriggered && scrollX >= 400) {
             shaderTriggered = true;
             gsap.to(uniforms.dispFactor, {
                 value: 1,
                 duration: 1.2,
-                ease: 'power2.inOut'
+                ease: "power2.inOut",
             });
         } else if (shaderTriggered && scrollX < 400) {
             shaderTriggered = false;
             gsap.to(uniforms.dispFactor, {
                 value: 0,
                 duration: 1.2,
-                ease: 'power2.inOut'
+                ease: "power2.inOut",
             });
         }
-    });
+    })
 
-    // Bild nicht gestreckt anzeigen: Passe PlaneGeometry, Renderer und Container exakt an Bildseitenverhältnis an
-    function updateGeometryToImageRatio() {
-        const img = new window.Image();
-        img.src = './public/displace/1.png';
-        img.onload = function() {
-            const imgRatio = img.width / img.height;
-            // Container-Höhe bleibt wie im Layout, Breite wird angepasst
-            rect = container.getBoundingClientRect();
-            height = rect.height;
-            width = height * imgRatio;
-            // Setze Container und Canvas exakt auf Bildgröße
-            container.style.width = width + 'px';
-            container.style.height = height + 'px';
-            renderer.setSize(width, height);
-            // Passe Kamera an
-            camera.left = width / -2;
-            camera.right = width / 2;
-            camera.top = height / 2;
-            camera.bottom = height / -2;
-            camera.updateProjectionMatrix();
-            // Passe PlaneGeometry an
-            mesh.geometry.dispose();
-            mesh.geometry = new THREE.PlaneGeometry(width, height, 1);
-        };
-    }
-    updateGeometryToImageRatio();
-    window.addEventListener('resize', updateGeometryToImageRatio);
 });
