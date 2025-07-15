@@ -217,6 +217,12 @@ header a:hover {
   transform: translateX(-55%);
 }
 
+/* Spezifische Styles für den Distortion-Container */
+.horizontal_img .image__bl.distortion {
+  width: 200%;
+  height: 100%;
+  transform: translateX(-45%);
+}
 
 .vertical_img .image__bl {
   position: absolute;
