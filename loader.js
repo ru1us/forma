@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Start media preloader if conditions are met
-  if (shouldRunPreloader()) {
+  // Zuerst Mobile-Check - wenn Mobile, dann gar nichts laden
+  checkDesktopOnly();
+  
+  // Nur auf Desktop weiter mit Media-Preloader
+  if (window.innerWidth >= 1100 && shouldRunPreloader()) {
     startMediaPreloader();
   }
 
@@ -44,9 +47,18 @@ function checkDesktopOnly() {
   if (window.innerWidth < 1100) {
     warning.style.display = "flex";
     document.body.style.overflow = "hidden";
+    
+    // Loading-Screen verstecken auf Mobile
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+      loadingScreen.style.display = "none";
+    }
+    
+    return false; // Mobile detected
   } else {
     warning.style.display = "none";
     document.body.style.overflow = "";
+    return true; // Desktop detected
   }
 }
 window.addEventListener("resize", checkDesktopOnly);
@@ -150,7 +162,7 @@ function loadMedia(url) {
 function updateProgress(loaded, total) {
   const percentage = Math.round((loaded / total) * 100);
   const progressElement = document.querySelector(".progress-percentage");
-  const progressBar = document.querySelector(".progress-bar");
+  const progressBar = document.querySelector(".loader-bar-progress");
   
   if (progressElement) {
     progressElement.textContent = `${percentage}%`;
