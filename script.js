@@ -9,6 +9,11 @@ window.addEventListener("load", function () {
         window.location.href = "kol2.html";
     });
 
+    document.getElementById("link3").addEventListener("click", function () {
+      triggerLoad("kol3.html");
+      window.location.href = "kol3.html";
+    });
+
     gsap.registerPlugin(ScrollTrigger);
 
     const scroller = this.document.querySelector("[data-scroll-container]");
@@ -149,7 +154,7 @@ window.addEventListener("load", function () {
 
     // Load videos as textures
     const video1 = document.createElement("video");
-    video1.src = "./public/displace/video1.mp4";
+    video1.src = "./public/displace/video1.1.mp4";
     video1.crossOrigin = "anonymous";
     video1.loop = true;
     video1.muted = true;
@@ -158,7 +163,7 @@ window.addEventListener("load", function () {
     video1.play();
 
     const video2 = document.createElement("video");
-    video2.src = "./public/displace/video2.mp4";
+    video2.src = "./public/displace/video2.2.mp4";
     video2.crossOrigin = "anonymous";
     video2.loop = true;
     video2.muted = true;

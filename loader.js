@@ -47,17 +47,16 @@ function checkDesktopOnly() {
   if (window.innerWidth < 1100) {
     warning.style.display = "flex";
     document.body.style.overflow = "hidden";
-    
     // Loading-Screen verstecken auf Mobile
     const loadingScreen = document.getElementById("loading-screen");
     if (loadingScreen) {
       loadingScreen.style.display = "none";
     }
-    
     return false; // Mobile detected
   } else {
     warning.style.display = "none";
-    document.body.style.overflow = "";
+    // Nur auf Desktop: overflow explizit auf visible setzen, damit Slider funktioniert
+    document.body.style.overflow = "visible";
     return true; // Desktop detected
   }
 }
