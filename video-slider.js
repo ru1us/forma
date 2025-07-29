@@ -111,12 +111,12 @@ class VideoSlider {
     if (nextBtn) nextBtn.addEventListener('click', () => this.goToNext());
     
     // Progress dots
-    this.progressDots.forEach((dot, index) => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.goToSlide(index);
-      });
-    });
+    // this.progressDots.forEach((dot, index) => {
+    //   dot.addEventListener('click', (e) => {
+    //     e.stopPropagation();
+    //     this.goToSlide(index);
+    //   });
+    // });
     
     // Video click events
     this.slideElements.forEach((slide, index) => {
