@@ -5,7 +5,8 @@ html, body{
 }
 
 #main{
-  background: linear-gradient(var(--pr-color), var(--light-color));
+  /* background: linear-gradient(var(--pr-color), var(--light-color)); */
+  background: black;
 }
 
 /* Video Slider Styles */
@@ -175,7 +176,7 @@ html, body{
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--mid-color);
+  background: var(--second-color);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -197,7 +198,7 @@ html, body{
   position: absolute;
   bottom: 20px;
   left: 20px;
-  color: white;
+  color: var(--pr-color);
   font-size: 1.5rem;
   font-weight: bold;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
@@ -258,11 +259,24 @@ html, body{
 
 .slider-description .description-content {
     width: 90%;
-    color: #fff;
+    color: var(--second-color);
     font-size: 1.2em;
     margin-left: 0 !important;
     margin-top: 5vh !important; /* gleiche Höhe wie Logo, horizontal */
 }
+
+ p {
+  color: var(--pr-color);
+}
+
+#bottom {
+  width: 40%;
+  padding-top: 50px;
+  margin: auto;
+  letter-spacing: .1em;
+  text-align: center
+}
+
 
 .header {
     height: fit-content;
@@ -335,13 +349,17 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--pr-color);
 }
 
 h1 {
   padding-top: 5vh;
   text-align: center;
-  color: var(--second-color);
+  color: var(--pr-color);
   font-size: 4vw;
   font-weight: 600;
   font-family: "noka", sans-serif;
+}
+h2{
+  color: var(--pr-color);
 }

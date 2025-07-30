@@ -30,18 +30,18 @@ class VideoSlider {
   }
   updateDescription() {
     const videoTitles = [
-      '01_',
-      '02_',
-      '03_',
-      '04_',
-      '05_'
+      '01_CCTV',
+      '02_Public_Comfort',
+      '03_Red_Discipline',
+      '04_Hidden_Assets',
+      '05_Street_Level'
     ];
     const videoDescriptions = [
-      'Beschreibung für Projekt Eins: Komfort und Design vereint.',
-      'Beschreibung für Projekt Zwei: Minimalismus trifft Funktion.',
-      'Beschreibung für Projekt Drei: Innovative Materialien.',
-      'Beschreibung für Projekt Vier: Nachhaltigkeit im Fokus.',
-      'Beschreibung für Projekt Fünf: Zeitlose Ästhetik.'
+      'Diese Lampe wirft warmes Licht – aus dem Blick einer Überwachungskamera. Der Chromkörper sitzt auf einem Fuß, der an eine Straßenlaterne erinnert. Technisch, dekorativ, fast vertraut. Sie erzeugt Intimität, wo eigentlich Kontrolle herrschen sollte. Überwachung und Wohlgefühl liegen hier überraschend nah beieinander.',
+      'Ein Sofa in Form einer Parkbank – aber weich. Die Füße sind aus Chrom, die Sitzfläche besteht aus gepolsterten Latten mit Stoffbezug. Öffentlicher Raum trifft auf Wohnzimmer. Was sonst hart und nüchtern ist, wird hier einladend. Die Grenzen zwischen privat und öffentlich verschwimmen.',
+      'Rotes Metall, verchromte Details – ein Schulspind wird zum Sideboard. Erinnerungen an Flure, Schlösser und Aufbewahrtes. Ordnung trifft auf Nostalgie. Persönliches wird zur Schau gestellt. Ein Möbel zwischen Disziplin und Design.',
+      'Zwei Schubladen, zwei Ablagen – verborgen in der Hülle eines öffentlichen Abfalleimers. Was sonst entsorgt wird, bekommt hier Struktur. Der Kontrast ist scharf: Funktionalität in der Form des Wegwerfbaren. Ein Möbel, das unseren Blick auf Wert umkehrt.',
+      'Ein kleiner Tisch in Betonoptik, rund und schwer. Oben das Muster eines Gullideckels, eingefasst unter Glas. Was sonst auf dem Boden liegt und mit Füßen getreten wird, wird hier zur Oberfläche für Bücher, Tassen oder Schlüssel. Das Übersehene wird sichtbar. Der Alltag kippt die Perspektive.'
     ];
     this.descriptionContent.innerHTML = `
       <h2>${videoTitles[this.currentIndex]}</h2>

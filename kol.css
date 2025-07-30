@@ -144,7 +144,9 @@ h1 {
   width: 40%;
   padding-top: 50px;
   margin: auto;
+  top: 50vh !important;
   letter-spacing: .1em;
+  text-align: center
 }
 
 footer {
