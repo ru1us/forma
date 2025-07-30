@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Zuerst Mobile-Check - wenn Mobile, dann gar nichts laden
   checkDesktopOnly();
   
-  // Nur auf Desktop weiter mit Media-Preloader
   if (window.innerWidth >= 1100 && shouldRunPreloader()) {
     startMediaPreloader();
   }
@@ -47,35 +45,30 @@ function checkDesktopOnly() {
   if (window.innerWidth < 1100) {
     warning.style.display = "flex";
     document.body.style.overflow = "hidden";
-    // Loading-Screen verstecken auf Mobile
     const loadingScreen = document.getElementById("loading-screen");
     if (loadingScreen) {
       loadingScreen.style.display = "none";
     }
-    return false; // Mobile detected
+    return false; 
   } else {
     warning.style.display = "none";
-    // Nur auf Desktop: overflow explizit auf visible setzen, damit Slider funktioniert
     document.body.style.overflow = "visible";
-    return true; // Desktop detected
+    return true; 
   }
 }
 window.addEventListener("resize", checkDesktopOnly);
 window.addEventListener("DOMContentLoaded", checkDesktopOnly);
 
-// Check if preloader should run
 function shouldRunPreloader() {
   return window.innerWidth >= 1100 && !sessionStorage.getItem("mediaPreloaded");
 }
 
-// All HTML files to scan for media
 const htmlFiles = [
   "index.html",
   "kol1.html",
   "kol2.html"
 ];
 
-// Additional known media files
 const additionalMedia = [
   "./public/displace/1.png",
   "./public/displace/2.png",
@@ -85,13 +78,11 @@ const additionalMedia = [
   "./public/displace/video2.mp4"
 ];
 
-// Extract media URLs from HTML content
 function extractMediaUrls(htmlContent) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlContent, "text/html");
   const mediaUrls = [];
   
-  // Get all images
   const images = doc.querySelectorAll("img");
   images.forEach(img => {
     const src = img.getAttribute("src");
@@ -100,7 +91,6 @@ function extractMediaUrls(htmlContent) {
     }
   });
   
-  // Get all videos
   const videos = doc.querySelectorAll("video");
   videos.forEach(video => {
     const src = video.getAttribute("src");
@@ -112,7 +102,6 @@ function extractMediaUrls(htmlContent) {
     });
   });
   
-  // Get CSS background images from style attributes
   const elementsWithBg = doc.querySelectorAll("*");
   elementsWithBg.forEach(el => {
     const style = el.getAttribute("style");
@@ -132,24 +121,20 @@ function extractMediaUrls(htmlContent) {
   return mediaUrls;
 }
 
-// Load a single media file
 function loadMedia(url) {
   return new Promise((resolve, reject) => {
     if (url.match(/\.(mp4|webm|ogg)$/i)) {
-      // Load video
       const video = document.createElement("video");
       video.onloadeddata = () => resolve(url);
       video.onerror = () => reject(new Error(`Failed to load video: ${url}`));
       video.src = url;
       video.load();
     } else if (url.match(/\.(jpg|jpeg|png|gif|svg|webp)$/i)) {
-      // Load image
       const img = new Image();
       img.onload = () => resolve(url);
       img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
       img.src = url;
     } else {
-      // Try to load as generic resource
       fetch(url)
         .then(response => response.ok ? resolve(url) : reject(new Error(`Failed to load: ${url}`)))
         .catch(() => reject(new Error(`Failed to load: ${url}`)));
@@ -157,7 +142,6 @@ function loadMedia(url) {
   });
 }
 
-// Update progress display
 function updateProgress(loaded, total) {
   const percentage = Math.round((loaded / total) * 100);
   const progressElement = document.querySelector(".progress-percentage");
@@ -172,21 +156,17 @@ function updateProgress(loaded, total) {
   }
 }
 
-// Main preloader function
 async function startMediaPreloader() {
   console.log("Starting media preloader...");
   
   try {
-    // Show loading screen
     const loadingScreen = document.getElementById("loading-screen");
     if (loadingScreen) {
       loadingScreen.style.display = "flex";
     }
     
-    // Collect all media URLs
     let allMediaUrls = [...additionalMedia];
     
-    // Load HTML files and extract media URLs
     for (const htmlFile of htmlFiles) {
       try {
         const response = await fetch(htmlFile);
@@ -200,12 +180,10 @@ async function startMediaPreloader() {
       }
     }
     
-    // Remove duplicates and filter valid URLs
     allMediaUrls = [...new Set(allMediaUrls)].filter(url => url && url.trim() !== "");
     
     console.log(`Found ${allMediaUrls.length} media files to preload`);
     
-    // Load all media files
     let loadedCount = 0;
     const total = allMediaUrls.length;
     
@@ -224,15 +202,12 @@ async function startMediaPreloader() {
       }
     });
     
-    // Wait for all media to load
     await Promise.all(loadPromises);
     
-    // Mark as preloaded
     sessionStorage.setItem("mediaPreloaded", "true");
     
     console.log("Media preloading complete!");
     
-    // Hide loading screen after a short delay
     setTimeout(() => {
       if (loadingScreen) {
         loadingScreen.style.display = "none";
@@ -241,7 +216,6 @@ async function startMediaPreloader() {
     
   } catch (error) {
     console.error("Error during media preloading:", error);
-    // Hide loading screen on error
     const loadingScreen = document.getElementById("loading-screen");
     if (loadingScreen) {
       loadingScreen.style.display = "none";

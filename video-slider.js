@@ -1,4 +1,3 @@
-// Video Slider with GSAP and 3D effects
 class VideoSlider {
   constructor(container) {
     this.container = container;
@@ -7,15 +6,12 @@ class VideoSlider {
     this.isAnimating = false;
     this.autoplayInterval = null;
     this.autoplayDelay = 10000;
-    // Fix body styling conflicts first
     this.setupBodyOverrides();
     this.init();
   }
   
   setupBodyOverrides() {
-    // Warte ein bisschen, damit loader.js seine Arbeit machen kann
     setTimeout(() => {
-      // Override styles that prevent slider from working
       document.body.style.setProperty('overflow', 'visible', 'important');
       document.body.style.setProperty('height', '100vh', 'important');
       document.body.style.setProperty('position', 'relative', 'important');
@@ -50,7 +46,6 @@ class VideoSlider {
   }
   
   createSlider() {
-    // Create main slider structure
     this.container.innerHTML = `
       <div class="slider-description" style="position:absolute;left:0;top:0;width:28vw;height:100vh;display:flex;align-items:center;justify-content:center;z-index:20;">
         <div class="description-content" style="width:90%;color:#fff;font-size:1.2em;"></div>
@@ -103,22 +98,12 @@ class VideoSlider {
   }
   
   setupEventListeners() {
-    // Navigation buttons
     const prevBtn = this.container.querySelector('.prev-btn');
     const nextBtn = this.container.querySelector('.next-btn');
     
     if (prevBtn) prevBtn.addEventListener('click', () => this.goToPrevious());
     if (nextBtn) nextBtn.addEventListener('click', () => this.goToNext());
     
-    // Progress dots
-    // this.progressDots.forEach((dot, index) => {
-    //   dot.addEventListener('click', (e) => {
-    //     e.stopPropagation();
-    //     this.goToSlide(index);
-    //   });
-    // });
-    
-    // Video click events
     this.slideElements.forEach((slide, index) => {
       slide.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -129,22 +114,18 @@ class VideoSlider {
       });
     });
     
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') this.goToPrevious();
       if (e.key === 'ArrowRight') this.goToNext();
     });
     
-    // Pause autoplay on hover
     this.container.addEventListener('mouseenter', () => this.pauseAutoplay());
     this.container.addEventListener('mouseleave', () => this.startAutoplay());
   }
   
   setupGSAP() {
-    // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
     
-    // Initial animation when slider comes into view
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: this.container,
@@ -154,7 +135,6 @@ class VideoSlider {
       }
     });
     
-    // Animate slider entrance
     tl.from(this.slideElements, {
       duration: 1.2,
       y: 100,
@@ -164,7 +144,6 @@ class VideoSlider {
       ease: "power3.out"
     });
     
-    // Animate progress dots
     tl.from('.progress-dot', {
       duration: 0.6,
       scale: 0,
@@ -179,15 +158,12 @@ class VideoSlider {
       const video = slide.querySelector('video');
       const position = this.getSlidePosition(index);
       
-      // Remove all position classes
       slide.classList.remove('active', 'prev', 'next', 'far-left', 'far-right', 'hidden');
       
-      // Add appropriate position class
       slide.classList.add(position);
       
-      // Control video playback - only active video plays and loops
       if (position === 'active') {
-        video.currentTime = 0; // Start from beginning
+        video.currentTime = 0;
         video.play().catch(e => console.log('Video autoplay prevented:', e));
       } else {
         video.pause();
@@ -195,7 +171,6 @@ class VideoSlider {
       }
     });
     
-    // Update progress dots
     this.progressDots.forEach((dot, index) => {
       dot.classList.toggle('active', index === this.currentIndex);
     });
@@ -224,11 +199,9 @@ class VideoSlider {
 
     this.updateSlidePositions();
     this.updateDescription();
-    // Simple timeout to prevent rapid clicking
     setTimeout(() => {
       this.isAnimating = false;
     }, 100);
-    // Autoplay intentionally disabled
   }
   
   goToNext() {
@@ -259,7 +232,6 @@ class VideoSlider {
     this.startAutoplay();
   }
   
-  // Public API
   destroy() {
     this.pauseAutoplay();
     ScrollTrigger.getAll().forEach(trigger => {
@@ -270,7 +242,6 @@ class VideoSlider {
   }
 }
 
-// Auto-initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const sliderContainer = document.querySelector('.video-slider-container');
   if (sliderContainer && !window.videoSlider) {
@@ -281,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = VideoSlider;
 }

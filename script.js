@@ -141,10 +141,6 @@ window.addEventListener("load", function () {
     ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
     ScrollTrigger.refresh();
 
-    // Smooth Image Distortion Transition with Three.js, GSAP, and Displacement Map
-
-    // Import Three.js if not already loaded
-
     let renderer, scene, camera, material, mesh;
     let uniforms;
     const container = document.querySelector(".distortion");
@@ -152,7 +148,6 @@ window.addEventListener("load", function () {
     let width = rect.width;
     let height = rect.height;
 
-    // Load videos as textures
     const video1 = document.createElement("video");
     video1.src = "./public/displace/video1.1.mp4";
     video1.crossOrigin = "anonymous";
@@ -177,7 +172,6 @@ window.addEventListener("load", function () {
     const loader = new THREE.TextureLoader();
     const disp = loader.load("./public/displace/heightmap2.png");
 
-    // Set texture properties for displacement
     texture1.minFilter = texture2.minFilter = disp.minFilter = THREE.LinearFilter;
     texture1.magFilter = texture2.magFilter = disp.magFilter = THREE.LinearFilter;
     texture1.anisotropy =
@@ -185,7 +179,6 @@ window.addEventListener("load", function () {
         disp.anisotropy =
         renderer ? renderer.capabilities.getMaxAnisotropy() : 1;
 
-    // Create scene
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
@@ -201,10 +194,8 @@ window.addEventListener("load", function () {
     );
     camera.position.z = 1;
 
-    // Stärke des Displacement-Effekts zentral steuern
     const DISTORTION_STRENGTH = 0.1;
 
-    // Shader uniforms
     uniforms = {
         effectFactor: { value: DISTORTION_STRENGTH },
         dispFactor: { value: 0.0 },
@@ -213,7 +204,6 @@ window.addEventListener("load", function () {
         disp: { value: disp },
     };
 
-    // Vertex shader
     const vertexShader = `
     varying vec2 vUv;
     void main() {
@@ -222,7 +212,6 @@ window.addEventListener("load", function () {
     }
     `;
 
-    // Fragment shader
     const fragmentShader = `
     varying vec2 vUv;
     uniform sampler2D texture1;
@@ -246,7 +235,6 @@ window.addEventListener("load", function () {
     }
     `;
 
-    // Create material and mesh
     material = new THREE.ShaderMaterial({
         uniforms: uniforms,
         vertexShader: vertexShader,
@@ -254,23 +242,19 @@ window.addEventListener("load", function () {
         transparent: true,
     });
 
-    // Helper to create mesh with correct aspect ratio and centered
     function createCenteredMesh(videoWidth, videoHeight, containerWidth, containerHeight) {
-        // Video soll volle Höhe ausfüllen, Breite darf überstehen
         const videoRatio = videoWidth / videoHeight;
         const drawHeight = containerHeight;
         const drawWidth = containerHeight * videoRatio;
         const geometry = new THREE.PlaneGeometry(drawWidth, drawHeight, 1);
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(0, 0, 0); // Exakt zentriert
+        mesh.position.set(0, 0, 0); 
         return mesh;
     }
 
-    // Initial mesh (will be replaced after video metadata loaded)
     mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, height, 1), material);
     scene.add(mesh);
 
-    // Handle resize and centering
     function updateGeometryToVideoRatio() {
         rect = container.getBoundingClientRect();
         width = rect.width;
@@ -282,12 +266,9 @@ window.addEventListener("load", function () {
         camera.bottom = height / -2;
         camera.updateProjectionMatrix();
 
-        // Only update mesh if video metadata is loaded
         if (video1.videoWidth && video1.videoHeight) {
-            // Remove old mesh
             scene.remove(mesh);
             if (mesh.geometry) mesh.geometry.dispose();
-            // Create new centered mesh
             mesh = createCenteredMesh(
                 video1.videoWidth,
                 video1.videoHeight,
@@ -300,9 +281,7 @@ window.addEventListener("load", function () {
     video1.addEventListener("loadedmetadata", updateGeometryToVideoRatio);
     window.addEventListener("resize", updateGeometryToVideoRatio);
 
-    // Render loop
     function animate() {
-        // Update video textures
         if (texture1) texture1.needsUpdate = true;
         if (texture2) texture2.needsUpdate = true;
         renderer.render(scene, camera);
@@ -310,7 +289,6 @@ window.addEventListener("load", function () {
     }
     animate();
 
-    // LocomotiveScroll: Shader-Effekt ab horizontalem Scroll von 400
     let shaderTriggered = false;
     locoScroll.on("scroll", (obj) => {
         const scrollX = locoScroll.scroll.instance.scroll.x;
