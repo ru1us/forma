@@ -149,7 +149,7 @@ window.addEventListener("load", function () {
     let height = rect.height;
 
     const video1 = document.createElement("video");
-    video1.src = "./public/displace/video1.1.mp4";
+    video1.src = "./public/displace/video1.1.webm";
     video1.crossOrigin = "anonymous";
     video1.loop = true;
     video1.muted = true;
@@ -158,7 +158,7 @@ window.addEventListener("load", function () {
     video1.play();
 
     const video2 = document.createElement("video");
-    video2.src = "./public/displace/video2.2.mp4";
+    video2.src = "./public/displace/video2.2.webm";
     video2.crossOrigin = "anonymous";
     video2.loop = true;
     video2.muted = true;
