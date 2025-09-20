@@ -27,6 +27,7 @@ html, body{
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
+  pointer-events: none;
 }
 
 .video-slide {
@@ -40,6 +41,8 @@ html, body{
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: none;
   border: none;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .video-slide video {
@@ -48,6 +51,7 @@ html, body{
   object-fit: cover;
   justify-content: flex-end;
   display: block;
+  pointer-events: none;
 }
 
 .video-slide.active {
