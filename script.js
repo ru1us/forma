@@ -1,17 +1,17 @@
 window.addEventListener("load", function () {
     document.getElementById("link1").addEventListener("click", function () {
-        triggerLoad("https://ru1us.github.io/forma/kol1.html");
-        window.location.href = "https://ru1us.github.io/forma/kol1.html";
+        triggerLoad("kol1.html");
+        window.location.href = "kol1.html";
     });
 
     document.getElementById("link2").addEventListener("click", function () {
-        triggerLoad("https://ru1us.github.io/forma/kol2.html");
-        window.location.href = "https://ru1us.github.io/forma/kol2.html";
+        triggerLoad("kol2.html");
+        window.location.href = "kol2.html";
     });
 
     document.getElementById("link3").addEventListener("click", function () {
-      triggerLoad("https://ru1us.github.io/forma/kol3.html");
-      window.location.href = "https://ru1us.github.io/forma/kol3.html";
+      triggerLoad("kol3.html");
+      window.location.href = "kol3.html";
     });
 
     gsap.registerPlugin(ScrollTrigger);
@@ -149,7 +149,7 @@ window.addEventListener("load", function () {
     let height = rect.height;
 
     const video1 = document.createElement("video");
-    video1.src = "https://ru1us.github.io/forma/public/displace/video1.1.webm";
+    video1.src = "./public/displace/video1.1.webm";
     video1.crossOrigin = "anonymous";
     video1.loop = true;
     video1.muted = true;
@@ -158,7 +158,7 @@ window.addEventListener("load", function () {
     video1.play();
 
     const video2 = document.createElement("video");
-    video2.src = "https://ru1us.github.io/forma/public/displace/video2.2.webm";
+    video2.src = "./public/displace/video2.2.webm";
     video2.crossOrigin = "anonymous";
     video2.loop = true;
     video2.muted = true;
@@ -170,7 +170,7 @@ window.addEventListener("load", function () {
     const texture2 = new THREE.VideoTexture(video2);
 
     const loader = new THREE.TextureLoader();
-    const disp = loader.load("https://ru1us.github.io/forma/public/displace/heightmap2.png");
+    const disp = loader.load("./public/displace/heightmap2.png");
 
     texture1.minFilter = texture2.minFilter = disp.minFilter = THREE.LinearFilter;
     texture1.magFilter = texture2.magFilter = disp.magFilter = THREE.LinearFilter;
