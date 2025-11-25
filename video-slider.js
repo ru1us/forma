@@ -71,11 +71,11 @@ class VideoSlider {
       '05'
     ];
     const videoFiles = [
-      "https://ru1us.github.io/forma/public/3/lamp.webm",
-      "https://ru1us.github.io/forma/public/3/sofa.1.webm",
-      "https://ru1us.github.io/forma/public/3/sideboard.webm",
-      "https://ru1us.github.io/forma/public/3/müll.webm",
-      "https://ru1us.github.io/forma/public/3/tabloe.webm",
+      "public/3/lamp.webm",
+      "public/3/sofa.1.webm",
+      "public/3/sideboard.webm",
+      "public/3/müll.webm",
+      "public/3/tabloe.webm",
     ];
     return videoTitles.map((title, index) => `
       <div class="video-slide" data-index="${index}">
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.videoSlider = new VideoSlider(sliderContainer);
     }
     document.querySelector(".logo").addEventListener("click", () => {
-      window.location.href = "https://ru1us.github.io/forma/index.html";
+      window.location.href = "https://www.ru1us.github.io/forma/";
     });
 });
 
