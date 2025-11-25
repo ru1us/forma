@@ -2,8 +2,8 @@ window.addEventListener("load", function () {
   this.document.querySelectorAll("nav .logo").forEach((img) => {
     console.log("Adding click event listener to logo image:", img);
     img.addEventListener("click", () => {
-      triggerLoad("index.html");
-      this.window.location.href = "index.html";
+      triggerLoad("https://ru1us.github.io/forma/index.html");
+      this.window.location.href = "https://ru1us.github.io/forma/index.html";
     });
   });
 

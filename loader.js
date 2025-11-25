@@ -64,18 +64,18 @@ function shouldRunPreloader() {
 }
 
 const htmlFiles = [
-  "index.html",
-  "kol1.html",
-  "kol2.html"
+  "https://ru1us.github.io/forma/index.html",
+  "https://ru1us.github.io/forma/kol1.html",
+  "https://ru1us.github.io/forma/kol2.html"
 ];
 
 const additionalMedia = [
-  "./public/displace/1.png",
-  "./public/displace/2.png",
-  "./public/displace/heightMap.png",
-  "./public/displace/heightmap2.png",
-  "./public/displace/video1.mp4",
-  "./public/displace/video2.mp4"
+  "https://ru1us.github.io/forma/public/displace/1.png",
+  "https://ru1us.github.io/forma/public/displace/2.png",
+  "https://ru1us.github.io/forma/public/displace/heightMap.png",
+  "https://ru1us.github.io/forma/public/displace/heightmap2.png",
+  "https://ru1us.github.io/forma/public/displace/video1.mp4",
+  "https://ru1us.github.io/forma/public/displace/video2.mp4"
 ];
 
 function extractMediaUrls(htmlContent) {
