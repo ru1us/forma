@@ -70,6 +70,12 @@ body::-webkit-scrollbar {
   position: fixed;
 }
 
+.header a:has(.logo) {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
 .container {
   display: flex;
   width: 100%;
